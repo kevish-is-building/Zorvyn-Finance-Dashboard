@@ -3,9 +3,15 @@ import { motion } from 'framer-motion'
 const MotionSummaryCard = motion.article
 
 const toneClasses = {
-  balance: 'from-blue-500/15 to-transparent',
-  income: 'from-emerald-500/15 to-transparent',
-  expense: 'from-rose-500/15 to-transparent',
+  balance: 'from-sky-400/26 via-sky-100/35 to-white/60 dark:from-sky-500/24 dark:via-sky-900/18 dark:to-slate-900',
+  income: 'from-emerald-400/26 via-emerald-100/35 to-white/60 dark:from-emerald-500/24 dark:via-emerald-900/18 dark:to-slate-900',
+  expense: 'from-rose-300/32 via-rose-100/40 to-white/70 dark:from-rose-500/24 dark:via-rose-900/20 dark:to-slate-900',
+}
+
+const toneLabelClasses = {
+  balance: 'text-sky-700 dark:text-sky-300',
+  income: 'text-emerald-700 dark:text-emerald-300',
+  expense: 'text-rose-700 dark:text-rose-300',
 }
 
 export default function SummaryCard({ title, value, subtitle, tone }) {
@@ -13,12 +19,13 @@ export default function SummaryCard({ title, value, subtitle, tone }) {
     <MotionSummaryCard
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.22 }}
-      className={`rounded-2xl border border-slate-200 bg-gradient-to-b p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 ${toneClasses[tone]}`}
+      transition={{ duration: 0.28 }}
+      whileHover={{ y: -4 }}
+      className={`ui-panel rounded-3xl bg-gradient-to-br p-5 sm:p-6 ${toneClasses[tone]}`}
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.08em] text-blue-600 dark:text-blue-400">{title}</p>
-      <h2 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-100">{value}</h2>
-      <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{subtitle}</p>
+      <p className={`text-xs font-bold uppercase tracking-[0.12em] ${toneLabelClasses[tone]}`}>{title}</p>
+      <h2 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-50">{value}</h2>
+      <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{subtitle}</p>
     </MotionSummaryCard>
   )
 }

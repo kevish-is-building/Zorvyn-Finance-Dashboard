@@ -6,13 +6,14 @@ export default function Filters({
   onChange,
   onReset,
 }) {
-  const labelClass = 'text-sm text-slate-500 dark:text-slate-400'
+  const labelClass = 'text-xs font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400'
   const controlClass =
-    'w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100'
+    'w-full rounded-lg border border-slate-300/80 bg-white/85 px-2.5 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-200/70 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-700 dark:focus:ring-cyan-950'
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-      <div className="grid gap-2 lg:col-span-2">
+    <div className="rounded-2xl border border-slate-300/70 bg-white/65 p-3 dark:border-slate-700 dark:bg-slate-900/55">
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-12">
+        <div className="grid gap-1.5 sm:col-span-2 lg:col-span-5">
         <label htmlFor="search" className={labelClass}>Search</label>
         <input
           id="search"
@@ -24,7 +25,7 @@ export default function Filters({
         />
       </div>
 
-      <div className="grid gap-2">
+        <div className="grid gap-1.5 lg:col-span-2">
         <label htmlFor="typeFilter" className={labelClass}>Type</label>
         <select
           id="typeFilter"
@@ -40,7 +41,7 @@ export default function Filters({
         </select>
       </div>
 
-      <div className="grid gap-2">
+        <div className="grid gap-1.5 lg:col-span-2">
         <label htmlFor="categoryFilter" className={labelClass}>Category</label>
         <select
           id="categoryFilter"
@@ -57,7 +58,7 @@ export default function Filters({
         </select>
       </div>
 
-      <div className="grid gap-2">
+        <div className="grid gap-1.5 lg:col-span-2">
         <label htmlFor="sortBy" className={labelClass}>Sort</label>
         <select
           id="sortBy"
@@ -73,13 +74,14 @@ export default function Filters({
         </select>
       </div>
 
-      <button
-        type="button"
-        onClick={onReset}
-        className="self-end rounded-xl border border-slate-300 bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-      >
-        Reset
-      </button>
+        <button
+          type="button"
+          onClick={onReset}
+          className="self-end rounded-lg border border-cyan-300/60 bg-cyan-50/80 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/40 lg:col-span-1"
+        >
+          Reset
+        </button>
+      </div>
     </div>
   )
 }

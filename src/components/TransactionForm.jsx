@@ -1,46 +1,63 @@
 import { useState } from 'react'
 
-export default function TransactionForm({ onAdd }) {
-  const [formData, setFormData] = useState({
-    date: '',
-    description: '',
-    amount: '',
-    category: '',
-    type: 'expense',
+const emptyForm = {
+  date: '',
+  description: '',
+  amount: '',
+  category: '',
+  type: 'expense',
+}
+
+export default function TransactionForm({
+  mode = 'create',
+  initialValues,
+  isSubmitting,
+  onSubmit,
+  onCancel,
+}) {
+  const [formData, setFormData] = useState(() => {
+    if (!initialValues) {
+      return { ...emptyForm }
+    }
+
+    return {
+      ...initialValues,
+      amount: String(initialValues.amount ?? ''),
+    }
   })
 
   function handleChange(field, value) {
     setFormData((current) => ({ ...current, [field]: value }))
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
 
     if (!formData.date || !formData.description || !formData.amount || !formData.category) {
       return
     }
 
-    onAdd({
-      ...formData,
-      amount: Number(formData.amount),
-    })
+    try {
+      await onSubmit({
+        ...formData,
+        amount: Number(formData.amount),
+      })
 
-    setFormData({
-      date: '',
-      description: '',
-      amount: '',
-      category: '',
-      type: 'expense',
-    })
+      if (mode === 'create') {
+        setFormData(emptyForm)
+      }
+    } catch {
+      // Errors are surfaced by the store-level error banner.
+    }
   }
 
-  const labelClass = 'text-sm text-slate-500 dark:text-slate-400'
+  const labelClass = 'text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400'
   const controlClass =
-    'w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100'
+    'w-full rounded-lg border border-slate-300/80 bg-white/85 px-2.5 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-200/70 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-700 dark:focus:ring-cyan-950'
 
   return (
-    <form className="grid gap-3 sm:grid-cols-2 xl:grid-cols-6" onSubmit={handleSubmit}>
-      <div className="grid gap-2">
+    <form className="grid gap-2 sm:grid-cols-2 xl:grid-cols-12" onSubmit={handleSubmit}>
+      <div className="grid gap-1.5 xl:col-span-2">
         <label htmlFor="transactionDate" className={labelClass}>Date</label>
         <input
           id="transactionDate"
@@ -51,7 +68,7 @@ export default function TransactionForm({ onAdd }) {
         />
       </div>
 
-      <div className="grid gap-2">
+      <div className="grid gap-1.5 xl:col-span-3">
         <label htmlFor="transactionDescription" className={labelClass}>Description</label>
         <input
           id="transactionDescription"
@@ -63,7 +80,7 @@ export default function TransactionForm({ onAdd }) {
         />
       </div>
 
-      <div className="grid gap-2">
+      <div className="grid gap-1.5 xl:col-span-2">
         <label htmlFor="transactionAmount" className={labelClass}>Amount</label>
         <input
           id="transactionAmount"
@@ -76,7 +93,7 @@ export default function TransactionForm({ onAdd }) {
         />
       </div>
 
-      <div className="grid gap-2">
+      <div className="grid gap-1.5 xl:col-span-2">
         <label htmlFor="transactionCategory" className={labelClass}>Category</label>
         <input
           id="transactionCategory"
@@ -88,7 +105,7 @@ export default function TransactionForm({ onAdd }) {
         />
       </div>
 
-      <div className="grid gap-2">
+      <div className="grid gap-1.5 xl:col-span-2">
         <label htmlFor="transactionType" className={labelClass}>Type</label>
         <select
           id="transactionType"
@@ -101,12 +118,24 @@ export default function TransactionForm({ onAdd }) {
         </select>
       </div>
 
-      <button
-        type="submit"
-        className="self-end rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
-      >
-        Add transaction
-      </button>
+      <div className="self-end flex flex-wrap items-center gap-2 xl:col-span-3 xl:justify-end">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="rounded-lg bg-gradient-to-r from-cyan-600 to-sky-600 px-3 py-2 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {mode === 'edit' ? 'Save changes' : 'Add transaction'}
+        </button>
+        {mode === 'edit' ? (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="rounded-lg border border-slate-300 bg-white/90 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+          >
+            Cancel
+          </button>
+        ) : null}
+      </div>
     </form>
   )
 }

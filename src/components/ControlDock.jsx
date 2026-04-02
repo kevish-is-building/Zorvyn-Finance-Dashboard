@@ -19,11 +19,11 @@ export default function ControlDock({
       transition={{ duration: 0.25 }}
       role="region"
       aria-label="Quick controls"
-      className="fixed bottom-3 right-3 z-30 w-[min(320px,calc(100vw-1.5rem))] rounded-2xl border border-slate-300 bg-white/90 p-3 shadow-xl backdrop-blur dark:border-slate-700 dark:bg-slate-900/90 sm:bottom-5 sm:right-5"
+      className="ui-panel fixed bottom-3 right-3 z-30 w-[min(320px,calc(100vw-1.5rem))] rounded-2xl p-3 sm:bottom-5 sm:right-5"
     >
       <button
         type="button"
-        className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+        className="w-full rounded-xl border border-cyan-300/60 bg-cyan-50/70 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 dark:border-cyan-800/70 dark:bg-cyan-950/25 dark:text-cyan-300 dark:hover:bg-cyan-950/40"
         aria-expanded={isExpanded}
         aria-controls="quick-controls"
         onClick={onToggleExpanded}

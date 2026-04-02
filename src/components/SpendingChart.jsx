@@ -1,9 +1,53 @@
+import { useMemo } from 'react'
+import {
+  ArcElement,
+  Chart as ChartJS,
+  Legend,
+  Tooltip,
+} from 'chart.js'
+import { Doughnut } from 'react-chartjs-2'
 import SectionHeader from './SectionHeader'
 import { formatCurrency } from '../utils/formatters'
 
+const CHART_COLORS = ['#3b82f6', '#6366f1', '#14b8a6', '#f97316', '#e11d48', '#84cc16', '#06b6d4']
+
+ChartJS.register(ArcElement, Tooltip, Legend)
+
 export default function SpendingChart({ items, total }) {
+  const labels = useMemo(() => items.map((item) => item.category), [items])
+  const amounts = useMemo(() => items.map((item) => item.amount), [items])
+
+  const doughnutData = useMemo(() => ({
+    labels,
+    datasets: [
+      {
+        data: amounts,
+        borderWidth: 0,
+        backgroundColor: items.map((_, index) => CHART_COLORS[index % CHART_COLORS.length]),
+        hoverOffset: 8,
+      },
+    ],
+  }), [amounts, items, labels])
+
+  const doughnutOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '64%',
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => `${context.label}: ${formatCurrency(context.raw)} (${items[context.dataIndex].percentage}%)`,
+        },
+      },
+    },
+  }
+
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div className="ui-panel rounded-3xl p-5">
       <SectionHeader
         title="Spending Breakdown"
         subtitle="Expense categories based on current transaction data"
@@ -11,26 +55,11 @@ export default function SpendingChart({ items, total }) {
 
       <div className="grid gap-3">
         {items.length > 0 ? (
-          items.map((item) => (
-            <div key={item.category} className="grid gap-2">
-              <div className="flex items-center justify-between gap-3">
-                <strong className="text-sm text-slate-900 dark:text-slate-100">{item.category}</strong>
-                <span className="text-xs text-slate-500 dark:text-slate-400">{formatCurrency(item.amount)}</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500"
-                    style={{ width: `${Math.max(item.percentage, 4)}%` }}
-                  />
-                </div>
-                <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{item.percentage}%</span>
-              </div>
-            </div>
-          ))
+          <div className="h-56 w-full rounded-2xl border border-cyan-200/50 bg-gradient-to-b from-cyan-50/70 to-white p-3 dark:border-cyan-900/50 dark:from-cyan-950/20 dark:to-slate-900">
+            <Doughnut data={doughnutData} options={doughnutOptions} />
+          </div>
         ) : (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-center text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-400">
+            <div className="rounded-xl border border-dashed border-cyan-300/60 bg-cyan-50/65 px-4 py-6 text-center text-sm text-slate-600 dark:border-cyan-800/70 dark:bg-cyan-950/18 dark:text-slate-300">
             No expense data available yet.
           </div>
         )}

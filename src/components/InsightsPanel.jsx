@@ -5,7 +5,7 @@ export default function InsightsPanel({ insights }) {
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <SectionHeader
         title="Insights"
-        subtitle="Simple observations generated from the mock finance data"
+        subtitle="Simple observations generated from live transaction API data"
       />
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
