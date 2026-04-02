@@ -33,7 +33,7 @@ export default function TransactionsSection({
         title="Transactions"
         subtitle="Search, filter, edit, export, and manage finance activity"
         action={
-          <div className="flex flex-wrap items-center justify-end gap-2">
+          <div className="flex w-full flex-wrap items-center justify-start gap-2 sm:justify-end">
             <ExportActions items={filteredTransactions} />
           </div>
         }

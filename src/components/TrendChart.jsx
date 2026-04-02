@@ -74,13 +74,13 @@ export default function TrendChart({ data }) {
   }
 
   return (
-    <div className="ui-panel rounded-3xl p-5">
+    <div className="ui-panel rounded-3xl p-4 sm:p-5">
       <SectionHeader
         title="Balance Trend"
         subtitle="A quick view of how the balance moves over time"
       />
 
-      <div className="h-56 w-full rounded-2xl border border-cyan-200/50 bg-gradient-to-b from-cyan-50/70 to-white p-3 dark:border-cyan-900/50 dark:from-cyan-950/20 dark:to-slate-900">
+      <div className="h-52 w-full rounded-2xl border border-cyan-200/50 bg-gradient-to-b from-cyan-50/70 to-white p-2.5 sm:h-56 sm:p-3 dark:border-cyan-900/50 dark:from-cyan-950/20 dark:to-slate-900">
         {data.length > 0 ? (
           <Line data={lineData} options={sharedOptions} />
         ) : (

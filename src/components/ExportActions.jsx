@@ -14,12 +14,12 @@ export default function ExportActions({ items }) {
   const disabled = items.length === 0
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:justify-end">
       <button
         type="button"
         onClick={exportCsv}
         disabled={disabled}
-        className="rounded-xl border border-cyan-300/70 bg-cyan-50/85 px-3 py-2 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
+        className="rounded-lg border border-cyan-300/70 bg-cyan-50/85 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
       >
         Export CSV
       </button>
@@ -28,12 +28,12 @@ export default function ExportActions({ items }) {
         type="button"
         onClick={exportJson}
         disabled={disabled}
-        className="rounded-xl border border-cyan-300/70 bg-cyan-50/85 px-3 py-2 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
+        className="rounded-lg border border-cyan-300/70 bg-cyan-50/85 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
       >
         Export JSON
       </button>
 
-      <span className="text-xs font-medium text-slate-600 dark:text-slate-300">Exports current filtered list ({items.length} rows).</span>
+      <span className="w-full text-[11px] font-medium leading-relaxed text-slate-600 sm:w-auto dark:text-slate-300">Exports current filtered list ({items.length} rows).</span>
     </div>
   )
 }

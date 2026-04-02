@@ -12,8 +12,8 @@ export default function Filters({
 
   return (
     <div className="rounded-2xl border border-slate-300/70 bg-white/65 p-3 dark:border-slate-700 dark:bg-slate-900/55">
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-12">
-        <div className="grid gap-1.5 sm:col-span-2 lg:col-span-5">
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-12">
+        <div className="grid gap-1.5 sm:col-span-2 lg:col-span-3 xl:col-span-5">
         <label htmlFor="search" className={labelClass}>Search</label>
         <input
           id="search"
@@ -25,7 +25,7 @@ export default function Filters({
         />
       </div>
 
-        <div className="grid gap-1.5 lg:col-span-2">
+        <div className="grid gap-1.5 lg:col-span-1 xl:col-span-2">
         <label htmlFor="typeFilter" className={labelClass}>Type</label>
         <select
           id="typeFilter"
@@ -41,7 +41,7 @@ export default function Filters({
         </select>
       </div>
 
-        <div className="grid gap-1.5 lg:col-span-2">
+        <div className="grid gap-1.5 lg:col-span-1 xl:col-span-2">
         <label htmlFor="categoryFilter" className={labelClass}>Category</label>
         <select
           id="categoryFilter"
@@ -58,7 +58,7 @@ export default function Filters({
         </select>
       </div>
 
-        <div className="grid gap-1.5 lg:col-span-2">
+        <div className="grid gap-1.5 lg:col-span-1 xl:col-span-2">
         <label htmlFor="sortBy" className={labelClass}>Sort</label>
         <select
           id="sortBy"
@@ -77,7 +77,7 @@ export default function Filters({
         <button
           type="button"
           onClick={onReset}
-          className="self-end rounded-lg border border-cyan-300/60 bg-cyan-50/80 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/40 lg:col-span-1"
+          className="self-end rounded-lg border border-cyan-300/60 bg-cyan-50/80 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/40 lg:col-span-1 xl:col-span-1"
         >
           Reset
         </button>

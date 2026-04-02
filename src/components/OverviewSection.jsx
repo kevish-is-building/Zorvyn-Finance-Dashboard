@@ -39,8 +39,8 @@ export default function OverviewSection({
   }
 
   return (
-    <div className="grid gap-5">
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-4 md:gap-5">
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <SummaryCard
           title="Total Balance"
           value={formatCurrency(totals.balance)}
@@ -61,12 +61,16 @@ export default function OverviewSection({
         />
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[1.6fr_1fr]">
-        <TrendChart data={monthlyData} />
-        <SpendingChart items={expenseBreakdown.items} total={expenseBreakdown.totalExpenseAmount} />
+      <section className="grid items-stretch gap-4 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div className="min-w-0">
+          <TrendChart data={monthlyData} />
+        </div>
+        <div className="min-w-0">
+          <SpendingChart items={expenseBreakdown.items} total={expenseBreakdown.totalExpenseAmount} />
+        </div>
       </section>
 
-      <section className="">
+      <section className="min-w-0">
         <InsightsPanel insights={insights} />
       </section>
     </div>

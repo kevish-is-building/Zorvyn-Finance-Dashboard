@@ -21,8 +21,8 @@ export default function TransactionsTable({
 
   return (
     <div className="grid gap-3">
-      <div className="hidden overflow-x-auto rounded-2xl border border-slate-300/70 bg-white/75 p-2 dark:border-slate-700 dark:bg-slate-900/65 md:block">
-        <table className="w-full min-w-190 border-collapse">
+      <div className="hidden overflow-x-auto rounded-2xl border border-slate-300/70 bg-white/75 p-2 dark:border-slate-700 dark:bg-slate-900/65 lg:block">
+        <table className="w-full min-w-[820px] border-collapse">
           <thead>
             <tr>
               {['Date', 'Description', 'Category', 'Type', 'Amount', 'Actions'].map((head) => (
@@ -98,7 +98,7 @@ export default function TransactionsTable({
         </table>
       </div>
 
-      <div className="grid gap-3 md:hidden">
+      <div className="grid gap-3 lg:hidden">
         {items.map((transaction) => (
           <article
             key={transaction.id}

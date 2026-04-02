@@ -24,7 +24,7 @@ export default function SummaryCard({ title, value, subtitle, tone }) {
       className={`ui-panel rounded-3xl bg-gradient-to-br p-5 sm:p-6 ${toneClasses[tone]}`}
     >
       <p className={`text-xs font-bold uppercase tracking-[0.12em] ${toneLabelClasses[tone]}`}>{title}</p>
-      <h2 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-50">{value}</h2>
+      <h2 className="mt-2 break-words text-2xl font-semibold text-slate-900 sm:text-3xl dark:text-slate-50">{value}</h2>
       <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{subtitle}</p>
     </MotionSummaryCard>
   )

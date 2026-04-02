@@ -130,7 +130,7 @@ function App() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full px-4 pb-36 pt-6 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pb-36 pt-5 sm:px-6 lg:px-8">
         <MotionHeader
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,14 +149,14 @@ function App() {
           </p>
         </MotionHeader>
 
-        <main className="grid gap-5 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <main className="grid items-start gap-4 md:gap-5 lg:grid-cols-[280px_minmax(0,1fr)]">
           <SidebarTabs
             activeTab={activeTab}
             onChangeTab={setActiveTab}
             recordsCount={transactions.length}
           />
 
-          <section className="grid gap-5">
+          <section className="grid min-w-0 gap-4 md:gap-5">
             <AnimatePresence mode="wait" initial={false}>
               {activeTab === 'overview' ? (
                 <MotionOverview

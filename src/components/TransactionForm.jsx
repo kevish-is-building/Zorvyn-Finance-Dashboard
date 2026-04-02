@@ -56,8 +56,8 @@ export default function TransactionForm({
     'w-full rounded-lg border border-slate-300/80 bg-white/85 px-2.5 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-200/70 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-cyan-700 dark:focus:ring-cyan-950'
 
   return (
-    <form className="grid gap-2 sm:grid-cols-2 xl:grid-cols-12" onSubmit={handleSubmit}>
-      <div className="grid gap-1.5 xl:col-span-2">
+    <form className="grid gap-2 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-12" onSubmit={handleSubmit}>
+      <div className="grid gap-1.5 lg:col-span-2 xl:col-span-2">
         <label htmlFor="transactionDate" className={labelClass}>Date</label>
         <input
           id="transactionDate"
@@ -68,7 +68,7 @@ export default function TransactionForm({
         />
       </div>
 
-      <div className="grid gap-1.5 xl:col-span-3">
+      <div className="grid gap-1.5 lg:col-span-3 xl:col-span-3">
         <label htmlFor="transactionDescription" className={labelClass}>Description</label>
         <input
           id="transactionDescription"
@@ -80,7 +80,7 @@ export default function TransactionForm({
         />
       </div>
 
-      <div className="grid gap-1.5 xl:col-span-2">
+      <div className="grid gap-1.5 lg:col-span-1 xl:col-span-2">
         <label htmlFor="transactionAmount" className={labelClass}>Amount</label>
         <input
           id="transactionAmount"
@@ -93,7 +93,7 @@ export default function TransactionForm({
         />
       </div>
 
-      <div className="grid gap-1.5 xl:col-span-2">
+      <div className="grid gap-1.5 lg:col-span-2 xl:col-span-2">
         <label htmlFor="transactionCategory" className={labelClass}>Category</label>
         <input
           id="transactionCategory"
@@ -105,7 +105,7 @@ export default function TransactionForm({
         />
       </div>
 
-      <div className="grid gap-1.5 xl:col-span-2">
+      <div className="grid gap-1.5 lg:col-span-2 xl:col-span-2">
         <label htmlFor="transactionType" className={labelClass}>Type</label>
         <select
           id="transactionType"
@@ -118,11 +118,11 @@ export default function TransactionForm({
         </select>
       </div>
 
-      <div className="self-end flex flex-wrap items-center gap-2 xl:col-span-3 xl:justify-end">
+      <div className="flex flex-wrap items-center gap-2 lg:col-span-6 xl:col-span-3">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-lg bg-gradient-to-r from-cyan-600 to-sky-600 px-3 py-2 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-lg bg-linear-to-r from-cyan-600 to-sky-600 px-3 py-2 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {mode === 'edit' ? 'Save changes' : 'Add transaction'}
         </button>

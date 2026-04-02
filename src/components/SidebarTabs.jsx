@@ -1,11 +1,11 @@
 export default function SidebarTabs({ activeTab, onChangeTab, recordsCount }) {
   const buttonBase =
-    'rounded-2xl border p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60'
+    'rounded-2xl border p-3.5 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-lg sm:p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60'
 
   return (
-    <aside className="ui-panel h-fit rounded-4xl p-5 lg:sticky lg:top-5 lg:self-start">
+    <aside className="ui-panel h-fit rounded-3xl p-4 sm:rounded-4xl sm:p-5 lg:sticky lg:top-5 lg:self-start">
       <p className="text-xs font-semibold uppercase tracking-[0.12em] text-cyan-700 dark:text-cyan-300">Navigation</p>
-      <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-100">Dashboard tabs</h2>
+      <h2 className="mt-2 text-xl font-semibold text-slate-900 sm:text-2xl dark:text-slate-100">Dashboard tabs</h2>
       <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
         Switch between overview and transaction workspace.
       </p>
