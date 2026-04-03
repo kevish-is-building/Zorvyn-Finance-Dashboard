@@ -122,7 +122,7 @@ export default function TransactionForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-lg bg-linear-to-r from-cyan-600 to-sky-600 px-3 py-2 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+          className="cursor-pointer rounded-lg bg-linear-to-r from-cyan-600 to-sky-600 px-3 py-2 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {mode === 'edit' ? 'Save changes' : 'Add transaction'}
         </button>
