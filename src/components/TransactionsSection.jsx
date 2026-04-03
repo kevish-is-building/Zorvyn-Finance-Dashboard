@@ -58,14 +58,14 @@ export default function TransactionsSection({
             <button
               type="button"
               onClick={onClearError}
-              className="rounded-lg border border-amber-300 bg-white px-2 py-1 text-xs font-semibold text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300"
+              className="cursor-pointer rounded-lg border border-amber-300 bg-white px-2 py-1 text-xs font-semibold text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300"
             >
               Dismiss
             </button>
             <button
               type="button"
               onClick={onRetry}
-              className="rounded-lg border border-amber-300 bg-white px-2 py-1 text-xs font-semibold text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300"
+              className="cursor-pointer rounded-lg border border-amber-300 bg-white px-2 py-1 text-xs font-semibold text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300"
             >
               Retry load
             </button>

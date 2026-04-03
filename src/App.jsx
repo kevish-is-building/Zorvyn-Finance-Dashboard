@@ -130,7 +130,7 @@ function App() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pb-36 pt-5 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto w-full px-4 pb-36 pt-5 sm:px-6 lg:px-8">
         <MotionHeader
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

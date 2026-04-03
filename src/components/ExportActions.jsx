@@ -19,7 +19,7 @@ export default function ExportActions({ items }) {
         type="button"
         onClick={exportCsv}
         disabled={disabled}
-        className="rounded-lg border border-cyan-300/70 bg-cyan-50/85 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
+        className="cursor-pointer rounded-lg border border-cyan-300/70 bg-cyan-50/85 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
       >
         Export CSV
       </button>
@@ -28,7 +28,7 @@ export default function ExportActions({ items }) {
         type="button"
         onClick={exportJson}
         disabled={disabled}
-        className="rounded-lg border border-cyan-300/70 bg-cyan-50/85 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
+        className="cursor-pointer rounded-lg border border-cyan-300/70 bg-cyan-50/85 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.07em] text-cyan-800 transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/45"
       >
         Export JSON
       </button>

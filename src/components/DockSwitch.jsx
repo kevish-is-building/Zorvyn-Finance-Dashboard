@@ -1,7 +1,7 @@
 export default function DockSwitch({ label, isOn, onToggle, onText, offText, ariaLabel }) {
   return (
     <div className="grid gap-2">
-      <span className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400">{label}</span>
+      <span className="cursor-pointer text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">{label}</span>
       <button
         type="button"
         onClick={onToggle}

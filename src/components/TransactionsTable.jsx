@@ -71,7 +71,7 @@ export default function TransactionsTable({
                       <button
                         type="button"
                         onClick={() => onEdit(transaction.id)}
-                        className={`rounded-lg border px-2 py-1 text-xs font-semibold transition ${
+                        className={`cursor-pointer rounded-lg border px-2 py-1 text-xs font-semibold transition ${
                           editingTransactionId === transaction.id
                             ? 'border-cyan-400 bg-cyan-100 text-cyan-700 dark:border-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300'
                             : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800'
@@ -83,7 +83,7 @@ export default function TransactionsTable({
                         type="button"
                         onClick={() => onDelete(transaction.id)}
                         disabled={isSaving}
-                        className="rounded-lg border border-rose-300 bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-700 transition hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60 dark:border-rose-800 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-900/40"
+                        className="cursor-pointer rounded-lg border border-rose-300 bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-700 transition hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60 dark:border-rose-800 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-900/40"
                       >
                         Delete
                       </button>
@@ -142,7 +142,7 @@ export default function TransactionsTable({
                   <button
                     type="button"
                     onClick={() => onEdit(transaction.id)}
-                    className={`rounded-lg border px-2 py-1 text-xs font-semibold transition ${
+                    className={`cursor-pointer rounded-lg border px-2 py-1 text-xs font-semibold transition ${
                       editingTransactionId === transaction.id
                         ? 'border-cyan-400 bg-cyan-100 text-cyan-700 dark:border-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300'
                         : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800'
@@ -154,7 +154,7 @@ export default function TransactionsTable({
                     type="button"
                     onClick={() => onDelete(transaction.id)}
                     disabled={isSaving}
-                    className="rounded-lg border border-rose-300 bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-700 transition hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60 dark:border-rose-800 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-900/40"
+                    className="cursor-pointer rounded-lg border border-rose-300 bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-700 transition hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60 dark:border-rose-800 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-900/40"
                   >
                     Delete
                   </button>

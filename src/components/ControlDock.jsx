@@ -23,7 +23,7 @@ export default function ControlDock({
     >
       <button
         type="button"
-        className="w-full rounded-xl border border-cyan-300/60 bg-cyan-50/70 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 dark:border-cyan-800/70 dark:bg-cyan-950/25 dark:text-cyan-300 dark:hover:bg-cyan-950/40"
+        className="w-full rounded-xl border border-cyan-300/60 bg-cyan-50/70 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 dark:border-cyan-800/70 dark:bg-cyan-950/25 dark:text-cyan-300 dark:hover:bg-cyan-950/40 cursor-pointer"
         aria-expanded={isExpanded}
         aria-controls="quick-controls"
         onClick={onToggleExpanded}

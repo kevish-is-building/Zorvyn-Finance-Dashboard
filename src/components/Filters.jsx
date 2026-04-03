@@ -77,7 +77,7 @@ export default function Filters({
         <button
           type="button"
           onClick={onReset}
-          className="self-end rounded-lg border border-cyan-300/60 bg-cyan-50/80 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/40 lg:col-span-1 xl:col-span-1"
+          className="cursor-pointer self-end rounded-lg border border-cyan-300/60 bg-cyan-50/80 px-3 py-2 text-sm font-semibold text-cyan-800 transition hover:bg-cyan-100 dark:border-cyan-800 dark:bg-cyan-950/30 dark:text-cyan-300 dark:hover:bg-cyan-950/40 lg:col-span-1 xl:col-span-1"
         >
           Reset
         </button>

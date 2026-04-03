@@ -1,6 +1,6 @@
 export default function SidebarTabs({ activeTab, onChangeTab, recordsCount }) {
   const buttonBase =
-    'rounded-2xl border p-3.5 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-lg sm:p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60'
+    'cursor-pointer rounded-2xl border p-3.5 text-left transition duration-200 hover:-translate-y-0.5 hover:shadow-lg sm:p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60'
 
   return (
     <aside className="ui-panel h-fit rounded-3xl p-4 sm:rounded-4xl sm:p-5 lg:sticky lg:top-5 lg:self-start">
