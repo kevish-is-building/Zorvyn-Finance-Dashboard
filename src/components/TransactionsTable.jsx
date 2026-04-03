@@ -1,4 +1,9 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { formatCurrency, formatDate } from '../utils/formatters'
+
+const MotionWrap = motion.div
+const MotionRow = motion.tr
+const MotionCard = motion.article
 
 export default function TransactionsTable({
   items,
@@ -8,14 +13,21 @@ export default function TransactionsTable({
   onEdit,
   onDelete,
 }) {
+  const shouldReduceMotion = useReducedMotion()
+
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-cyan-300/60 bg-cyan-50/65 px-5 py-8 text-center dark:border-cyan-800/70 dark:bg-cyan-950/15">
+      <MotionWrap
+        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.2, ease: 'easeOut' }}
+        className="rounded-2xl border border-dashed border-cyan-300/60 bg-cyan-50/65 px-5 py-8 text-center dark:border-cyan-800/70 dark:bg-cyan-950/15"
+      >
         <h4 className="text-base font-semibold text-slate-900 dark:text-slate-100">No transactions found</h4>
         <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
           Try changing your filters or add a new transaction as admin.
         </p>
-      </div>
+      </MotionWrap>
     )
   }
 
@@ -39,8 +51,17 @@ export default function TransactionsTable({
           </thead>
 
           <tbody>
-            {items.map((transaction) => (
-              <tr key={transaction.id} className="transition hover:bg-cyan-50/60 dark:hover:bg-cyan-950/18">
+            {items.map((transaction, index) => (
+              <MotionRow
+                key={transaction.id}
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.18,
+                  delay: shouldReduceMotion ? 0 : Math.min(index * 0.012, 0.12),
+                }}
+                className="transition hover:bg-cyan-50/60 dark:hover:bg-cyan-950/18"
+              >
                 <td className="border-b border-slate-200/80 px-2 py-3 text-sm dark:border-slate-800">{formatDate(transaction.date)}</td>
                 <td className="border-b border-slate-200/80 px-2 py-3 text-sm dark:border-slate-800">{transaction.description}</td>
                 <td className="border-b border-slate-200/80 px-2 py-3 text-sm dark:border-slate-800">{transaction.category}</td>
@@ -101,16 +122,22 @@ export default function TransactionsTable({
                     </span>
                   )}
                 </td>
-              </tr>
+              </MotionRow>
             ))}
           </tbody>
         </table>
       </div>
 
       <div className="grid gap-3 lg:hidden">
-        {items.map((transaction) => (
-          <article
+        {items.map((transaction, index) => (
+          <MotionCard
             key={transaction.id}
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.18,
+              delay: shouldReduceMotion ? 0 : Math.min(index * 0.018, 0.18),
+            }}
             className="ui-card rounded-2xl bg-white/70 p-4 dark:bg-slate-900/70"
           >
             <div className="flex items-center justify-between gap-3">
@@ -184,7 +211,7 @@ export default function TransactionsTable({
                 </p>
               )}
             </div>
-          </article>
+          </MotionCard>
         ))}
       </div>
     </div>

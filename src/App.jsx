@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useMemo } from 'react'
 import ControlDock from './components/ControlDock'
 import OverviewSection from './components/OverviewSection'
@@ -17,11 +17,14 @@ import {
 } from './utils/transactions'
 
 const MotionHeader = motion.header
+const MotionShell = motion.div
+const MotionMain = motion.main
 const MotionOverview = motion.div
 const MotionTransactions = motion.section
 const MotionOrb = motion.div
 
 function App() {
+  const shouldReduceMotion = useReducedMotion()
   const role = useFinanceStore((state) => state.role)
   const theme = useFinanceStore((state) => state.theme)
   const activeTab = useFinanceStore((state) => state.activeTab)
@@ -115,27 +118,65 @@ function App() {
     }
   }
 
+  const pageVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.35,
+        ease: 'easeOut',
+      },
+    },
+  }
+
+  const mainVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: shouldReduceMotion ? 0 : 0.03,
+        staggerChildren: shouldReduceMotion ? 0 : 0.06,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 8 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.28,
+        ease: 'easeOut',
+      },
+    },
+  }
+
   return (
-    <div className="app-shell relative min-h-screen text-slate-900 transition-colors dark:text-slate-100">
+    <MotionShell
+      className="app-shell dashboard-enter relative min-h-screen text-slate-900 transition-colors dark:text-slate-100"
+      initial="hidden"
+      animate="visible"
+      variants={pageVariants}
+    >
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <MotionOrb
           className="absolute -left-18 top-22 h-56 w-56 rounded-full bg-cyan-300/30 blur-3xl dark:bg-cyan-500/24"
-          animate={{ x: [0, 40, 0], y: [0, -16, 0], scale: [1, 1.06, 1] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+          animate={shouldReduceMotion ? { x: 0, y: 0, scale: 1 } : { x: [0, 40, 0], y: [0, -16, 0], scale: [1, 1.06, 1] }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 14, repeat: Infinity, ease: 'easeInOut' }}
         />
         <MotionOrb
           className="absolute -right-17.5 -top-7.5 h-64 w-64 rounded-full bg-amber-300/26 blur-3xl dark:bg-sky-500/22"
-          animate={{ x: [0, -46, 0], y: [0, 22, 0], scale: [1.02, 0.95, 1.02] }}
-          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+          animate={shouldReduceMotion ? { x: 0, y: 0, scale: 1 } : { x: [0, -46, 0], y: [0, 22, 0], scale: [1.02, 0.95, 1.02] }}
+          transition={shouldReduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
         />
       </div>
 
       <div className="relative z-10 mx-auto w-full px-4 pb-36 pt-5 sm:px-6 lg:px-8">
         <MotionHeader
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="ui-panel sparkle-grid mb-6 overflow-hidden rounded-4xl p-7 sm:p-8"
+          variants={itemVariants}
+          className="ui-panel interactive-lift sparkle-grid mb-6 overflow-hidden rounded-4xl p-7 sm:p-8"
         >
           <p className="inline-flex rounded-full border border-cyan-400/35 bg-cyan-400/12 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-cyan-700 dark:text-cyan-300">
             Finance Dashboard UI
@@ -149,7 +190,10 @@ function App() {
           </p>
         </MotionHeader>
 
-        <main className="grid items-start gap-4 md:gap-5 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <MotionMain
+          className="grid items-start gap-4 md:gap-5 lg:grid-cols-[280px_minmax(0,1fr)]"
+          variants={mainVariants}
+        >
           <SidebarTabs
             activeTab={activeTab}
             onChangeTab={setActiveTab}
@@ -161,10 +205,10 @@ function App() {
               {activeTab === 'overview' ? (
                 <MotionOverview
                   key="overview"
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2 }}
+                  exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
+                  transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
                   className="grid gap-5"
                 >
                   <OverviewSection
@@ -180,10 +224,10 @@ function App() {
               ) : (
                 <MotionTransactions
                   key="transactions"
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2 }}
+                  exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
+                  transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
                   className="grid gap-5"
                 >
                   <TransactionsSection
@@ -211,7 +255,7 @@ function App() {
               )}
             </AnimatePresence>
           </section>
-        </main>
+        </MotionMain>
       </div>
 
       <ControlDock
@@ -222,7 +266,7 @@ function App() {
         onToggleRole={toggleRole}
         onToggleTheme={toggleTheme}
       />
-    </div>
+    </MotionShell>
   )
 }
 

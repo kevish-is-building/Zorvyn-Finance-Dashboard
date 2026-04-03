@@ -1,94 +1,93 @@
 # Finance Dashboard UI
 
-A simple finance dashboard built with React and JavaScript using mock data.
+A production-minded frontend dashboard focused on the essentials: clear financial visibility, role-aware actions, and reliable feedback states.
 
-## What this includes
+## Why this exists
 
-- Dashboard overview with:
-  - Total Balance
-  - Income
-  - Expenses
-- Time-based visualization:
-  - Balance trend chart
-- Categorical visualization:
-  - Spending breakdown by category
-- Transactions section with:
-  - Search
-  - Type filter
-  - Category filter
-  - Sorting
-- Basic role-based UI simulation:
-  - Viewer can only view data
-  - Admin can add transactions
-- Insights section with:
-  - Highest spending category
-  - Monthly comparison
-  - Expense ratio insight
-- Responsive layout for desktop, tablet, and mobile
-- Empty state handling
-- Optional extras included:
-  - Dark mode
-  - Local storage persistence for role, theme, and transactions
+This project is built to ship a clean baseline dashboard quickly.
+The goal is not feature bloat. The goal is a tight loop: load data, inspect trends, filter transactions, and manage records safely in admin mode.
+
+## Minimal feature set
+
+1. Overview KPIs: total balance, income, expenses.
+2. Balance trend chart (line) for month-over-month movement.
+3. Spending breakdown chart (doughnut) with category percentages.
+4. Insights cards derived from transaction data.
+5. Transactions table/cards with search, type filter, category filter, sort, and reset.
+6. Export actions for the currently filtered list (CSV and JSON).
+7. Role mode switching (viewer/admin) from the control dock.
+8. Admin actions: create, edit, delete transactions.
+9. Viewer restrictions: no create/edit/delete controls; info icon tooltip explains switch path to admin.
+10. Data-state UX: loading, saving, error banner, and retry.
+11. Responsive layout across mobile/tablet/desktop.
+12. Theme toggle (light/dark) and persisted preferences.
+
+## UX principles used
+
+1. Clarity first: labels are explicit, money values are consistently formatted, and chart titles explain intent.
+2. Role transparency: permissions are visible in the UI; restricted actions are not silently broken.
+3. Fast feedback: loading, syncing, and error states are shown in-context where work happens.
+4. Safe destructive flow: delete action includes a confirmation step.
+5. Progressive disclosure: quick controls can collapse/expand to reduce noise.
+6. Consistent interaction language: similar controls share shape, spacing, and behavior.
+7. Mobile parity: table behavior has a card alternative, not a degraded desktop copy.
+8. Accessible defaults: semantic controls, labels, focus-visible states, and keyboard-focus tooltip support.
 
 ## Tech stack
 
-- React
-- JavaScript
-- Vite
-- Plain CSS
+- React 19
+- Vite 8
+- Zustand (state + persisted preferences)
+- Tailwind CSS 4
+- Chart.js + react-chartjs-2
+- Framer Motion
 
-## Approach
+## Project layout
 
-The goal was to keep the code easy to understand and maintain.
-
-### Key decisions
-
-- Used basic React concepts only:
-  - `useState` for local UI state
-  - `useEffect` for persistence and theme updates
-  - `useMemo` for derived values like totals, filtered transactions, breakdowns, and insights
-- Kept everything simple and readable instead of over-engineering the structure
-- Used mock static data as requested
-- Built lightweight charts using plain HTML/CSS/SVG so there is no chart library dependency
-- Simulated role-based behavior entirely on the frontend
-
-## Project structure
-
-```bash
+```text
 src/
-  App.jsx
-  App.css
-  index.css
-  main.jsx
+  components/        # UI building blocks (overview, transactions, controls)
+  services/          # API layer (fetch/create/update/delete)
+  store/             # Zustand store and app actions
+  utils/             # formatters and transaction helpers
+  App.jsx            # shell, routing between tabs, orchestration
 ```
 
-## How to run
+## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open the local URL shown in the terminal.
+Open the local URL shown by Vite.
 
-## Build for production
+## Scripts
 
 ```bash
-npm run build
-npm run preview
+npm run dev      # local development
+npm run lint     # eslint checks
+npm run build    # production build
+npm run preview  # serve built output locally
 ```
 
-## Notes
+## Configuration
 
-- Transactions added in Admin mode are saved in local storage.
-- Role and theme are also persisted in local storage.
-- Since this is a frontend-only assignment, there is no backend or real authentication.
+Optional environment variable:
 
-## Possible improvements if extended further
+```bash
+VITE_TRANSACTIONS_API_URL=https://your-api-endpoint.example.com/transactions
+```
 
-- Edit and delete transaction actions for admin
-- CSV/JSON export
-- Better date-range filtering
-- More chart types
-- Mock API layer with loading/error states
-- Splitting into more components if the app grows larger
+If not provided, the app uses the default mock API URL configured in the service layer.
+
+## Behavior notes
+
+- Preferences persisted in local storage: role, theme, active tab, and filters.
+- Transaction records are loaded from API and normalized in the client.
+- This is frontend-only role behavior (no server-side auth enforcement).
+
+## Build mindset
+
+Keep it simple, observable, and easy to extend.
+Add new features only when they protect user outcomes or reduce operational confusion.
