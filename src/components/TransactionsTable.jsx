@@ -34,13 +34,13 @@ export default function TransactionsTable({
   return (
     <div className="grid gap-3">
       <div className="hidden overflow-x-auto rounded-2xl border border-slate-300/70 bg-white/75 p-2 dark:border-slate-700 dark:bg-slate-900/65 lg:block">
-        <table className="w-full min-w-[820px] border-collapse">
+        <table className="w-full min-w-205 border-collapse">
           <thead>
             <tr>
               {['Date', 'Description', 'Category', 'Type', 'Amount', 'Actions'].map((head) => (
                 <th
                   key={head}
-                  className={`border-b border-slate-300/70 px-2 pb-3 text-left text-xs font-bold uppercase tracking-[0.1em] text-slate-500 dark:border-slate-700 dark:text-slate-400 ${
+                  className={`border-b border-slate-300/70 px-2 pb-3 text-left text-xs font-bold uppercase tracking-widest text-slate-500 dark:border-slate-700 dark:text-slate-400 ${
                     head === 'Amount' ? 'text-right' : ''
                   }`}
                 >

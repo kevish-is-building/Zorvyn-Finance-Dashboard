@@ -1,49 +1,22 @@
 import { useMemo } from 'react'
-import {
-  ArcElement,
-  Chart as ChartJS,
-  Legend,
-  Tooltip,
-} from 'chart.js'
-import { Doughnut } from 'react-chartjs-2'
 import SectionHeader from './SectionHeader'
 import { formatCurrency } from '../utils/formatters'
 
 const CHART_COLORS = ['#3b82f6', '#6366f1', '#14b8a6', '#f97316', '#e11d48', '#84cc16', '#06b6d4']
 
-ChartJS.register(ArcElement, Tooltip, Legend)
-
 export default function SpendingChart({ items, total }) {
-  const labels = useMemo(() => items.map((item) => item.category), [items])
-  const amounts = useMemo(() => items.map((item) => item.amount), [items])
+  const breakdownItems = useMemo(() => {
+    if (total <= 0) {
+      return items.map((item) => ({ ...item, share: 0 }))
+    }
 
-  const doughnutData = useMemo(() => ({
-    labels,
-    datasets: [
-      {
-        data: amounts,
-        borderWidth: 0,
-        backgroundColor: items.map((_, index) => CHART_COLORS[index % CHART_COLORS.length]),
-        hoverOffset: 8,
-      },
-    ],
-  }), [amounts, items, labels])
+    return items.map((item) => ({
+      ...item,
+      share: (item.amount / total) * 100,
+    }))
+  }, [items, total])
 
-  const doughnutOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '64%',
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) => `${context.label}: ${formatCurrency(context.raw)} (${items[context.dataIndex].percentage}%)`,
-        },
-      },
-    },
-  }
+  const topItem = breakdownItems[0] ?? null
 
   return (
     <div className="ui-panel rounded-3xl p-4 sm:p-5">
@@ -55,18 +28,57 @@ export default function SpendingChart({ items, total }) {
       <div className="grid gap-3">
         {items.length > 0 ? (
           <>
-            <div className="h-56 w-full rounded-2xl border border-cyan-200/50 bg-linear-to-b from-cyan-50/70 to-white p-2.5 sm:h-56 sm:p-3 dark:border-cyan-900/50 dark:from-cyan-950/20 dark:to-slate-900">
-              <Doughnut data={doughnutData} options={doughnutOptions} />
+            <div className="rounded-2xl border border-cyan-200/55 bg-linear-to-br from-cyan-50/70 to-white p-3 dark:border-cyan-900/50 dark:from-cyan-950/20 dark:to-slate-900">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-[0.08em] text-cyan-700 dark:text-cyan-300">Top category</p>
+                  <p className="truncate text-base font-semibold text-slate-800 dark:text-slate-100">{topItem?.category}</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{formatCurrency(topItem?.amount ?? 0)}</p>
+                </div>
+                <div className="rounded-xl border border-cyan-200/70 bg-white/80 px-3 py-2 text-right dark:border-cyan-900/70 dark:bg-slate-900/60">
+                  <p className="text-[11px] uppercase tracking-[0.08em] text-slate-500 dark:text-slate-400">Share</p>
+                  <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">{topItem?.percentage ?? 0}%</p>
+                </div>
+              </div>
+
+              <div className="mt-3 flex h-3 overflow-hidden rounded-full bg-slate-200/75 dark:bg-slate-800/70">
+                {breakdownItems.map((item, index) => (
+                  <span
+                    key={item.category}
+                    className="h-full"
+                    style={{
+                      width: `${item.share}%`,
+                      backgroundColor: CHART_COLORS[index % CHART_COLORS.length],
+                    }}
+                    title={`${item.category}: ${item.percentage}%`}
+                  />
+                ))}
+              </div>
             </div>
 
-            <div className="grid gap-1.5 sm:grid-cols-2">
-              {items.map((item, index) => (
-                <div key={item.category} className="flex min-w-0 items-center justify-between gap-2 rounded-lg border border-slate-200/70 bg-white/70 px-2.5 py-1.5 text-xs dark:border-slate-700 dark:bg-slate-900/60">
-                  <span className="inline-flex min-w-0 items-center gap-2 text-slate-700 dark:text-slate-200">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: CHART_COLORS[index % CHART_COLORS.length] }} />
-                    <span className="truncate">{item.category}</span>
-                  </span>
-                  <span className="shrink-0 text-slate-500 dark:text-slate-400">{item.percentage}%</span>
+            <div className="grid gap-2">
+              {breakdownItems.map((item, index) => (
+                <div key={item.category} className="rounded-xl border border-slate-200/70 bg-white/70 px-3 py-2 dark:border-slate-700 dark:bg-slate-900/60">
+                  <div className="flex min-w-0 items-center justify-between gap-2 text-xs">
+                    <span className="flex min-w-0 flex-1 items-center gap-2 text-slate-700 dark:text-slate-200">
+                      <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: CHART_COLORS[index % CHART_COLORS.length] }} />
+                      <span className="truncate font-medium">{item.category}</span>
+                    </span>
+                    <span className="shrink-0 text-slate-500 dark:text-slate-400">{formatCurrency(item.amount)}</span>
+                  </div>
+
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200/75 dark:bg-slate-800/70">
+                      <span
+                        className="block h-full rounded-full"
+                        style={{
+                          width: `${item.share}%`,
+                          backgroundColor: CHART_COLORS[index % CHART_COLORS.length],
+                        }}
+                      />
+                    </div>
+                    <span className="shrink-0 text-xs font-medium text-slate-500 dark:text-slate-400">{item.percentage}%</span>
+                  </div>
                 </div>
               ))}
             </div>

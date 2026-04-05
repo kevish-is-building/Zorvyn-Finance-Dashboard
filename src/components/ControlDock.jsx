@@ -19,7 +19,7 @@ export default function ControlDock({
       transition={{ duration: 0.25 }}
       role="region"
       aria-label="Quick controls"
-      className="ui-panel fixed bottom-3 left-3 right-3 z-30 rounded-2xl p-3 sm:left-auto sm:w-[min(220px,calc(100vw-2.5rem))] sm:bottom-5 sm:right-5"
+      className="ui-panel min-w-2.5 w-fit fixed bottom-3 right-3 z-30 rounded-2xl p-3 sm:left-auto sm:w-[min(220px,calc(100vw-2.5rem))] sm:bottom-5 sm:right-5"
     >
       <button
         type="button"
